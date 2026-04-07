@@ -1,0 +1,146 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>4.0.5</version>
+        <relativePath/>
+    </parent>
+
+    <groupId>ba</groupId>
+    <artifactId>blog-client</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+    <name>client-1</name>
+    <description>React frontend served by Spring Boot</description>
+
+    <properties>
+        <java.version>17</java.version>
+    </properties>
+
+    <build>
+        <plugins>
+
+            <!-- ============================= -->
+            <!-- 1. Frontend build (pnpm)     -->
+            <!-- ============================= -->
+            <plugin>
+                <groupId>com.github.eirslett</groupId>
+                <artifactId>frontend-maven-plugin</artifactId>
+                <version>1.15.0</version>
+
+                <configuration>
+                    <!-- Use system Node and pnpm instead of installing locally -->
+                    <workingDirectory>.</workingDirectory>
+                    <installDirectory>${project.basedir}</installDirectory>
+                    <nodeVersion>v20.19.6</nodeVersion>
+                    <npmVersion>provided</npmVersion>
+                </configuration>
+
+                <executions>
+
+                    <!-- Install Node and npm (skip if using system) -->
+                    <execution>
+                        <id>install-node-and-npm</id>
+                        <goals>
+                            <goal>install-node-and-npm</goal>
+                        </goals>
+                        <phase>initialize</phase>
+                    </execution>
+
+                    <!-- Install dependencies -->
+                    <execution>
+                        <id>pnpm-install</id>
+                        <goals>
+                            <goal>npm</goal>
+                        </goals>
+                        <configuration>
+                            <arguments>install</arguments>
+                        </configuration>
+                    </execution>
+
+                    <!-- Lint -->
+                    <execution>
+                        <id>pnpm-lint</id>
+                        <phase>validate</phase>
+                        <goals>
+                            <goal>npm</goal>
+                        </goals>
+                        <configuration>
+                            <arguments>run lint</arguments>
+                        </configuration>
+                    </execution>
+
+                    <!-- Format -->
+                    <execution>
+                        <id>pnpm-format</id>
+                        <phase>validate</phase>
+                        <goals>
+                            <goal>npm</goal>
+                        </goals>
+                        <configuration>
+                            <arguments>run format</arguments>
+                        </configuration>
+                    </execution>
+
+                    <!-- Build React -->
+                    <execution>
+                        <id>pnpm-build</id>
+                        <phase>generate-resources</phase>
+                        <goals>
+                            <goal>npm</goal>
+                        </goals>
+                        <configuration>
+                            <arguments>run build</arguments>
+                        </configuration>
+                    </execution>
+
+                </executions>
+            </plugin>
+
+            <!-- ============================= -->
+            <!-- 2. Copy React build to Spring -->
+            <!-- ============================= -->
+            <plugin>
+                <artifactId>maven-resources-plugin</artifactId>
+                <version>3.3.1</version>
+
+                <executions>
+                    <execution>
+                        <id>copy-frontend</id>
+                        <phase>process-resources</phase>
+                        <goals>
+                            <goal>copy-resources</goal>
+                        </goals>
+                        <configuration>
+                            <outputDirectory>
+                                ${project.build.outputDirectory}/static
+                            </outputDirectory>
+
+                            <resources>
+                                <resource>
+                                    <directory>dist</directory>
+                                    <filtering>false</filtering>
+                                </resource>
+                            </resources>
+                        </configuration>
+                    </execution>
+                </executions>
+
+            </plugin>
+
+            <!-- ============================= -->
+            <!-- 3. Spring Boot packaging     -->
+            <!-- ============================= -->
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+
+        </plugins>
+    </build>
+
+</project>

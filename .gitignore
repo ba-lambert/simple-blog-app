@@ -23,8 +23,6 @@ yarn-error.log*
 pnpm-debug.log*
 
 # Environment
-.env
-.env.local
 .env.*.local
 
 # Build outputs
@@ -41,3 +39,4 @@ pnpm-debug.log*
 # OS
 Thumbs.db
 .DS_Store
+config.bat

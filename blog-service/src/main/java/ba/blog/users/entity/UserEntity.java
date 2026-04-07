@@ -1,6 +1,6 @@
-package ba.service1.users.entity;
+package ba.blog.users.entity;
 
-import ba.service1.shared.entity.BaseEntity;
+import ba.blog.shared.entity.BaseEntity;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;

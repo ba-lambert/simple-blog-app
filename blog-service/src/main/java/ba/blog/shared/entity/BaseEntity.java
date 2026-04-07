@@ -1,4 +1,4 @@
-package ba.service1.shared.entity;
+package ba.blog.shared.entity;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;

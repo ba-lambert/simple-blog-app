@@ -1,8 +1,7 @@
-package ba.service1.users.repository;
+package ba.blog.users.repository;
 
-import ba.service1.users.entity.UserEntity;
+import ba.blog.users.entity.UserEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
 

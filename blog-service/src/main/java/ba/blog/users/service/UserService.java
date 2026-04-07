@@ -1,8 +1,8 @@
-package ba.service1.users.service;
+package ba.blog.users.service;
 
-import ba.service1.users.dto.UpdateProfileRequest;
-import ba.service1.users.entity.UserEntity;
-import ba.service1.users.repository.UserRepository;
+import ba.blog.users.dto.UpdateProfileRequest;
+import ba.blog.users.entity.UserEntity;
+import ba.blog.users.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.oauth2.jwt.Jwt;

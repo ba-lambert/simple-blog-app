@@ -1,4 +1,4 @@
-package ba.service1;
+package ba.blog;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

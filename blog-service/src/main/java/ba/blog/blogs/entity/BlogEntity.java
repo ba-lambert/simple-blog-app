@@ -1,6 +1,6 @@
-package ba.service1.blogs.entity;
+package ba.blog.blogs.entity;
 
-import ba.service1.shared.entity.BaseEntity;
+import ba.blog.shared.entity.BaseEntity;
 import jakarta.persistence.*;
 
 @Entity
